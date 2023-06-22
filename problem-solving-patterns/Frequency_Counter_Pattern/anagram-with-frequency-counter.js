@@ -3,36 +3,29 @@
 
 // * If length of WORD_1 is not equals to WORD_2 lenght ( return false )
 
-// * loop through the arr1 to push keys into frequencyCounter1;
-// * loop through the arr2 to push keys into frequencyCounter2;
-
-// * loop through the frequencyCounter1 keys
-// * If frequencyCounter1 key is not in the frequencyCounter2 object return false;
-// * If frequencyCounter1 key's value is not in the frequencyCounter2 key's value return null;
-
 const WORD_1 = "texttwisttime";
 const WORD_2 = "timetwisttext";
 
 function validAnagram(str1, str2) {
+
     if(str1.length !== str2.length){
         return false;
     }
-    let arr1 = str1.split("");
-    let arr2 = str2.split("");
-    const frequencyCounter1 = {};
-    const frequencyCounter2 = {};
+    
+    const lookup = {};
 
-    for(char of arr1){
-        frequencyCounter1[char] = (frequencyCounter1[char] || 0) + 1;
+    for(const letter of str1){
+        // if letter is on the object increment it by 1 and if not in the object then set it to 1;
+        lookup[letter] = (lookup[letter] || 0) + 1;
     }
 
-    for(char of arr2){
-        frequencyCounter2[char] = (frequencyCounter2[char] || 0) + 1;
-    }
-
-    for(const key in frequencyCounter1){
-        if(!frequencyCounter2.hasOwnProperty(key) || frequencyCounter1[key] !== frequencyCounter2[key]) {
+    for(const letter of str2){
+        // If letter is in in the object ( OR if it's 0 ) return false
+        if(!lookup[letter]){
             return false;
+        } else {
+            // If the letter is in the object decrease it by one ( with this it will finally become 0 which will make the if condition true )
+            lookup[letter] -= 1;
         }
     }
 
