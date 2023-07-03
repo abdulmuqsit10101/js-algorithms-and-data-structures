@@ -11,6 +11,7 @@ const sort = (array) => {
 
 // Multiple Pointers Pattern
 const countUniqueValues = (unsortedArr) => {
+    // * InCase the array is not sorted, So we are sorting
     const array = sort(unsortedArr);
     const uniqueValuedArray = [];
     
